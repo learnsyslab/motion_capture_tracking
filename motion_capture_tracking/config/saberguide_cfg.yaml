@@ -8,6 +8,12 @@
     use_host_time: true
     publish_stamped_poses: true
     broadcast_tf: false
+    # How often a received frame is published. Frames are always read from the motion capture
+    # system as fast as they arrive; this only decimates publishing.
+    #   0   -> publish immediately on every received frame (recommended)
+    #   > 0 -> publish at this rate. A value that is not an integer divisor of the motion
+    #          capture frame rate is allowed, but the interval will vary by up to one frame
+    #          and the node logs a warning at startup.
     update_rate: 50.
     # the list of to-be-published stamped poses have two formats:
     # - if each string contains ':', then the first part is the target name defined in the MoCap workspace, the second
