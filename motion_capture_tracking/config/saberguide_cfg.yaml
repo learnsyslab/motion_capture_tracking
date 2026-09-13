@@ -19,7 +19,7 @@
     # - if each string contains ':', then the first part is the target name defined in the MoCap workspace, the second
     #   part is the wished topic name
     # - if no ':', we then publish the default topic names as "stamped_pose_<target name>"
-    publish_stamped_poses_for: ["hb1:/mavros/vision_pose/pose", "gate2:/obstacle/gate2"]
+    publish_stamped_poses_for: ["hb1:/mavros/vision_pose/pose"]
 
     
 
