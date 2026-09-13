@@ -4,3 +4,7 @@
     type: "vicon"
     # Specify the hostname or IP of the computer running the motion capture software
     hostname: "10.157.163.191"
+
+    # Broadcast the tf tree and nothing else. Publishing stamped poses per rigid body is opt-in,
+    # see holybro_cfg.yaml and saberguide_cfg.yaml for setups that use it.
+    broadcast_tf: true

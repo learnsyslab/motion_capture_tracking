@@ -1,14 +1,20 @@
 cmake_minimum_required(VERSION 3.8)
 project(motion_capture_tracking)
 
+
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
 set(CMAKE_INSTALL_RPATH "$ORIGIN")
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(geometry_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(eigen3_cmake_module REQUIRED)
@@ -42,11 +48,12 @@ target_link_libraries(motion_capture_tracking_node
 ament_target_dependencies(motion_capture_tracking_node
   rclcpp
   tf2_ros
+  geometry_msgs
 )
 target_include_directories(motion_capture_tracking_node PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-target_compile_features(motion_capture_tracking_node PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+target_compile_features(motion_capture_tracking_node PUBLIC c_std_99 cxx_std_20)  # Require C99 and C++20
 
 install(TARGETS motion_capture_tracking_node
   DESTINATION lib/${PROJECT_NAME})

@@ -1,0 +1,25 @@
+/motion_capture_tracking:
+  ros__parameters:
+    # one of "optitrack", "optitrack_closed_source", "vicon", "qualisys", "nokov", "vrpn", "motionanalysis"
+    type: "vrpn"
+    # Specify the hostname or IP of the computer running the motion capture software
+    hostname: "192.168.108.243"
+
+    use_host_time: true
+    publish_stamped_poses: true
+    # MAVROS reads the vision estimate off its own topic, so the tf tree is dead weight here
+    broadcast_tf: false
+    # How often a received frame is published. Frames are always read from the motion capture
+    # system as fast as they arrive; this only decimates publishing.
+    #   0   -> publish immediately on every received frame (recommended)
+    #   > 0 -> publish at this rate. A value that is not an integer divisor of the motion
+    #          capture frame rate is allowed, but the interval will vary by up to one frame
+    #          and the node logs a warning at startup.
+    update_rate: 50.
+    # the list of to-be-published stamped poses have two formats:
+    # - if each string contains ':', then the first part is the target name defined in the MoCap workspace, the second
+    #   part is the wished topic name
+    # - if no ':', we then publish the default topic names as "stamped_pose_<target name>"
+    # "hb1" is the Holybro rigid body; MAVROS takes the external vision estimate on
+    # /mavros/vision_pose/pose.
+    publish_stamped_poses_for: ["hb1:/mavros/vision_pose/pose"]
